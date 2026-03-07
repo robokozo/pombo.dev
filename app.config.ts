@@ -1,8 +1,8 @@
-export default defineAppConfig({
+export default {
   ui: {
     colors: {
       primary: 'indigo',
       neutral: 'zinc',
     },
   },
-})
+}
