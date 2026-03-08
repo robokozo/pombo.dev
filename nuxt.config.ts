@@ -1,10 +1,10 @@
-import { defineNuxtConfig } from 'nuxt/config'
+import { defineNuxtConfig } from "nuxt/config";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui'],
+  modules: ["@nuxt/ui"],
 
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
 
   // Disable auto-imports — all imports must be explicit per project guidelines
   imports: {
@@ -16,11 +16,11 @@ export default defineNuxtConfig({
     dirs: [],
   },
 
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: "2024-11-01",
 
   devtools: { enabled: true },
 
   nitro: {
-    preset: 'github-pages',
+    preset: "github-pages",
   },
-})
+});
