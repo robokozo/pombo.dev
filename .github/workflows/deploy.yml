@@ -33,6 +33,8 @@ jobs:
 
       - name: Generate static site
         run: npm run generate
+        env:
+          NUXT_APP_BASE_URL: /pombo.dev/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
