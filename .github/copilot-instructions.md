@@ -51,6 +51,7 @@ Full documentation index: https://nuxt.com/llms.txt
 Nuxt v4 docs base URL: https://nuxt.com/raw/docs/4.x/
 
 Key references:
+
 - Configuration: https://nuxt.com/raw/docs/4.x/getting-started/configuration.md
 - Auto-imports: https://nuxt.com/raw/docs/4.x/guide/concepts/auto-imports.md
 - Directory structure: https://nuxt.com/raw/docs/4.x/directory-structure.md
@@ -60,3 +61,13 @@ Key references:
 - Pages: https://nuxt.com/raw/docs/4.x/directory-structure/app/pages.md
 - Nuxt config reference: https://nuxt.com/raw/docs/4.x/api/nuxt-config.md
 - GitHub Pages deployment: https://nuxt.com/raw/deploy/github-pages.md
+- Built-in components: https://nuxt.com/raw/docs/4.x/api/components/nuxt-time.md
+
+## Package installation policy
+
+**Always check the Nuxt docs before installing a package.** Many things that were previously third-party modules are now built into Nuxt core (e.g. `<NuxtTime>`, `useHead`, `useSeoMeta`). Installing a package that duplicates built-in functionality adds unnecessary dependencies and may cause deprecation warnings.
+
+Before running `npm install <pkg>`:
+
+1. Check https://nuxt.com/llms.txt and the relevant docs page to see if Nuxt already provides the feature natively.
+2. Check if the installed modules (`@nuxt/ui`, `@vueuse/nuxt`, `@nuxt/content`, `@tresjs/nuxt`) already cover the need.

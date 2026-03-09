@@ -231,7 +231,7 @@ useGamepadNav({
         :class="titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
       >
         <div class="flex items-center gap-3 text-[0.95rem] tracking-[0.3em] text-slate-300">
-          <span>{{ new Date().getFullYear() }}</span>
+          <NuxtTime :datetime="new Date()" year="numeric" />
           <span class="text-slate-500">—</span>
           <span class="text-slate-300">FULL-STACK DEVELOPER</span>
         </div>
