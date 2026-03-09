@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useLoop } from "@tresjs/core";
 import { BufferGeometry, BufferAttribute, PointsMaterial, LineBasicMaterial, Color } from "three";
 
 const props = defineProps<{
   activeColor: string | null;
-  transitionColor: string | null;
 }>();
-
-const emit = defineEmits<{ "transition-done": [] }>();
 
 // ─── Particle data ────────────────────────────────────────────────────────────
 const PARTICLE_COUNT = 1800;
@@ -36,46 +33,6 @@ const material = new PointsMaterial({
   opacity: 0.7,
   sizeAttenuation: true,
 });
-
-// ─── Scene transition particle ────────────────────────────────────────────────
-// Spawns near the centre of the field so it blends with the existing particles,
-// then rushes toward the camera. material.size grows each frame so it fills the
-// viewport right as it reaches the near-clip plane.
-
-let transitionProgress = -1;
-let transitionStartX = 0;
-let transitionStartY = 0;
-const transitionPos = new Float32Array([0, 0, 2]);
-const transitionPosAttr = new BufferAttribute(transitionPos, 3);
-const transitionGeometry = new BufferGeometry();
-transitionGeometry.setAttribute("position", transitionPosAttr);
-const transitionMaterial = new PointsMaterial({
-  size: 0.1,
-  sizeAttenuation: true,
-  transparent: true,
-  opacity: 1,
-  depthWrite: false,
-});
-const transitionVisible = ref(false);
-
-watch(
-  () => props.transitionColor,
-  (val) => {
-    if (val !== null) {
-      // Small random offset so it looks like it came from the swarm
-      transitionStartX = (Math.random() - 0.5) * 6;
-      transitionStartY = (Math.random() - 0.5) * 3;
-      transitionPos[0] = transitionStartX;
-      transitionPos[1] = transitionStartY;
-      transitionPos[2] = 2; // world z=2 → 8 units from camera, clearly visible
-      transitionMaterial.color.set(val);
-      transitionMaterial.size = 0.1;
-      transitionMaterial.opacity = 1;
-      transitionProgress = 0;
-      transitionVisible.value = true;
-    }
-  },
-);
 
 // ─── Arc / neuron-firing data ─────────────────────────────────────────────────
 // Each arc tracks two live particle indices. The path is re-baked every frame
@@ -284,26 +241,6 @@ onBeforeRender(() => {
     arcPosAttr.needsUpdate = true;
     arcColAttr.needsUpdate = true;
   }
-
-  // ─── Scene transition ─────────────────────────────────────────────────────
-  if (transitionProgress >= 0) {
-    transitionProgress += 1 / 40; // ~40 frames ≈ 0.67 s at 60 fps
-    const t = Math.min(transitionProgress, 1);
-    const eased = t * t; // ease-in: slow start, rockets toward camera
-    // Pull toward screen centre as it approaches
-    transitionPos[0] = transitionStartX * (1 - eased);
-    transitionPos[1] = transitionStartY * (1 - eased);
-    // z=2 (8 units away) → z=9.5 (0.5 units away)
-    transitionPos[2] = 2 + (9.5 - 2) * eased;
-    // Grow world-space size so the sprite fills the viewport at close range;
-    // at z=9.5, size=2.1 gives ~3000 px which exceeds any display
-    transitionMaterial.size = 0.1 + eased * 2.0;
-    transitionPosAttr.needsUpdate = true;
-    if (t >= 1) {
-      transitionProgress = -1;
-      emit("transition-done");
-    }
-  }
 });
 </script>
 
@@ -317,9 +254,4 @@ onBeforeRender(() => {
   />
   <TresPoints :geometry="geometry" :material="material" />
   <TresLineSegments :geometry="arcGeometry" :material="arcMaterial" />
-  <TresPoints
-    v-if="transitionVisible"
-    :geometry="transitionGeometry"
-    :material="transitionMaterial"
-  />
 </template>

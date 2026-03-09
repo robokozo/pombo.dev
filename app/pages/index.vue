@@ -57,7 +57,6 @@ const menuItems = [
 // ─── State ─────────────────────────────────────────────────────────────────────
 const hoveredIndex = ref<number | null>(null);
 const selectedIndex = ref<number | null>(null);
-const transitionColor = ref<string | null>(null);
 const titleVisible = ref(false);
 const menuVisible = ref(false);
 const router = useRouter();
@@ -76,10 +75,8 @@ onMounted(() => {
   }, 700);
 });
 
-function onTransitionDone() {
-  if (selectedIndex.value !== null) {
-    router.push(menuItems[selectedIndex.value]?.to ?? "/");
-  }
+function navigate({ to }: { to: string }) {
+  router.push(to);
 }
 
 // ─── Gamepad navigation ────────────────────────────────────────────────────────
@@ -104,7 +101,7 @@ useGamepadNav({
       const item = menuItems[i];
       if (item) {
         selectedIndex.value = i;
-        transitionColor.value = item.color;
+        navigate({ to: item.to });
       }
     }
   },
@@ -116,11 +113,7 @@ useGamepadNav({
     <!-- ── 3-D background canvas ───────────────────────────── -->
     <div class="absolute inset-0 z-0">
       <ClientOnly>
-        <ThreeBackground
-          :active-color="activeItem?.color ?? null"
-          :transition-color="transitionColor"
-          @transition-done="onTransitionDone"
-        />
+        <ThreeBackground :active-color="activeItem?.color ?? null" />
       </ClientOnly>
     </div>
 
@@ -170,7 +163,7 @@ useGamepadNav({
             @mouseleave="hoveredIndex = null"
             @click="
               selectedIndex = i;
-              transitionColor = item.color;
+              navigate({ to: item.to });
             "
           >
             <!-- electricity behind text -->
