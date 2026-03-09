@@ -13,8 +13,15 @@
     "format:check": "oxfmt --check ."
   },
   "dependencies": {
+    "@nuxt/content": "^3.12.0",
     "@nuxt/ui": "^4.5.1",
+    "@tresjs/cientos": "^5.5.0",
+    "@tresjs/leches": "^1.1.4",
+    "@tresjs/nuxt": "^5.4.0",
+    "@vueuse/nuxt": "^14.2.1",
+    "better-sqlite3": "^12.6.2",
     "nuxt": "^4.3.1",
+    "three": "^0.183.2",
     "vue": "^3.5.29",
     "vue-router": "^4.5.0"
   },

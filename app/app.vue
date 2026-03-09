@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { NuxtPage, UApp } from '#components'
+import { NuxtPage } from "#components";
 </script>
 
 <template>
-  <UApp>
-    <NuxtPage />
-  </UApp>
+  <NuxtPage />
 </template>
