@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { useRouter } from "#app";
+import { useRouter, useRuntimeConfig } from "#app";
 import { useGamepadNav } from "../composables/useGamepadNav";
 
 const router = useRouter();
@@ -142,10 +142,11 @@ const debugReadout = computed(() =>
 );
 
 // ─── Background music ─────────────────────────────────────────────────────────
+const { app } = useRuntimeConfig();
 const muted = ref(false);
 let audio: HTMLAudioElement | null = null;
 onMounted(() => {
-  audio = new Audio("/sounds/skill_select.mp3");
+  audio = new Audio(`${app.baseURL}sounds/skill_select.mp3`);
   audio.loop = true;
   audio.volume = 0.4;
   audio.play().catch(() => {}); // browser may block until first interaction
