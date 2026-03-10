@@ -115,26 +115,26 @@ features/
 function createLogger() {
   return {
     log({ message }: { message: string }) {
-      console.log(message)
+      console.log(message);
     },
-  }
+  };
 }
 
 function createUserService({
   logger,
 }: {
-  logger: { log: (payload: { message: string }) => void }
+  logger: { log: (payload: { message: string }) => void };
 }) {
   return {
     createUser(name: string) {
-      logger.log({ message: `User created: ${name}` })
+      logger.log({ message: `User created: ${name}` });
       // ...other logic
     },
-  }
+  };
 }
 
-const userService = createUserService({ logger: createLogger() })
-userService.createUser('Alice')
+const userService = createUserService({ logger: createLogger() });
+userService.createUser("Alice");
 ```
 
 ---
@@ -210,13 +210,13 @@ userService.createUser('Alice')
 
 ```ts
 // Good: as const for literal types
-const directions = ['up', 'down', 'left', 'right'] as const
+const directions = ["up", "down", "left", "right"] as const;
 
 // Good: satisfies for type validation
 const config = {
   port: 8080,
   debug: true,
-} satisfies AppConfig
+} satisfies AppConfig;
 ```
 
 ---
@@ -230,14 +230,14 @@ const config = {
 
 ```ts
 // Not allowed
-let value: any
+let value: any;
 
 // Discouraged
-const foo = bar as string
+const foo = bar as string;
 
 // Preferred
 function handle(input: string | number) {
-  if (typeof input === 'string') {
+  if (typeof input === "string") {
     // ...
   }
 }
@@ -279,10 +279,10 @@ function handle(input: string | number) {
 
 ```ts
 // Not preferred
-array.map(doStuff)
+array.map(doStuff);
 
 // Preferred
-array.map((x) => doStuff({ name: x }))
+array.map((x) => doStuff({ name: x }));
 ```
 
 ---
@@ -295,7 +295,7 @@ array.map((x) => doStuff({ name: x }))
 
 ```ts
 // Matches: "user@example.com", "test123@domain.org"
-const emailRegex = /[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}/
+const emailRegex = /[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}/;
 ```
 
 ---
@@ -339,7 +339,7 @@ function increment() {
 }
 
 // Preferred for callbacks
-numbers.map((n) => n + 1)
+numbers.map((n) => n + 1);
 ```
 
 ---
@@ -352,8 +352,8 @@ numbers.map((n) => n + 1)
 
 ```ts
 // Preferred
-const numbers: Array<number> = [1, 2, 3]
+const numbers: Array<number> = [1, 2, 3];
 
 // Not preferred
-const numbers: number[] = [1, 2, 3]
+const numbers: number[] = [1, 2, 3];
 ```

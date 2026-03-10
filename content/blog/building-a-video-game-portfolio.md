@@ -7,13 +7,13 @@ tags: ["nuxt", "threejs", "design"]
 
 # Building a Video Game-Style Portfolio
 
-When I started thinking about my personal portfolio, I kept asking myself: *what would actually make someone stop scrolling?*
+When I started thinking about my personal portfolio, I kept asking myself: _what would actually make someone stop scrolling?_
 
 The answer I landed on: make it feel like a video game title screen.
 
 ## The Concept
 
-Think about opening a PlayStation game in 2005. The logo fades in. The cinematic music swells. A menu glows on the left. You don't click — you *press start*.
+Think about opening a PlayStation game in 2005. The logo fades in. The cinematic music swells. A menu glows on the left. You don't click — you _press start_.
 
 That's the energy I wanted.
 

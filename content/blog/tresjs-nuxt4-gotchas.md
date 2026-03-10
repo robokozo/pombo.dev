@@ -14,15 +14,15 @@ TresJS is a fantastic Vue 3 wrapper around Three.js. But plugging it into a Nuxt
 The docs for older versions reference `useRenderLoop`. In TresJS 5.x, the correct composable is `useLoop`, which exposes `onBeforeRender`.
 
 ```ts
-const { onBeforeRender } = useLoop()
+const { onBeforeRender } = useLoop();
 onBeforeRender(() => {
   // runs every frame
-})
+});
 ```
 
 ## Problem 2: `useLoop` requires TresJS context
 
-`useLoop` must be called inside a component that is rendered *inside* `<TresCanvas>`. If you call it in the same component that renders `<TresCanvas>`, it throws.
+`useLoop` must be called inside a component that is rendered _inside_ `<TresCanvas>`. If you call it in the same component that renders `<TresCanvas>`, it throws.
 
 The fix: extract your scene objects into a child component.
 

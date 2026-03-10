@@ -11,7 +11,7 @@ This isn't a hot take. Both frameworks are excellent. But after shipping product
 
 ## Developer Experience
 
-Nuxt's file-based routing, auto-imports (when you want them), and module ecosystem feel *designed* rather than assembled. The `nuxt.config.ts` is genuinely pleasant to work in.
+Nuxt's file-based routing, auto-imports (when you want them), and module ecosystem feel _designed_ rather than assembled. The `nuxt.config.ts` is genuinely pleasant to work in.
 
 Next.js is powerful but it can feel like you're fighting React Server Components until you internalize their mental model. That learning curve is real.
 
